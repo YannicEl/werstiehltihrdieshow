@@ -15,6 +15,12 @@
 	"placement": {
 		"mode": "smart",
 	},
+	"routes": [
+		{
+			"pattern": "werstiehltihrdie.show",
+			"custom_domain": true,
+		},
+	],
 	"assets": {
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare",
