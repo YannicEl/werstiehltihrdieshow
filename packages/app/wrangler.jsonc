@@ -1,0 +1,27 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "werstiehltihrdieshow",
+	"compatibility_date": "2025-12-26",
+	"compatibility_flags": ["nodejs_als"],
+	"main": ".svelte-kit/cloudflare/_worker.js",
+	"workers_dev": true,
+	"preview_urls": true,
+	"observability": {
+		"enabled": true,
+	},
+	"placement": {
+		"mode": "smart",
+	},
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".svelte-kit/cloudflare",
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "werstiehltihrdieshow-prod",
+			"database_id": "ff5b9250-3153-4f1d-aa16-7e01f97a5a1f",
+			"preview_database_id": "e23a31a4-f80a-4c1e-b7da-1ff74b8c4ce8",
+		},
+	],
+}

@@ -1,0 +1,13 @@
+packages:
+  - packages/**
+
+enableGlobalVirtualStore: false
+
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
+  - workerd
+
+peerDependencyRules:
+  allowedVersions:
+    vite: 8
