@@ -17,9 +17,9 @@
 	"devDependencies": {
 		"@total-typescript/tsconfig": "1.0.4",
 		"@types/node": "25.0.3",
-		"drizzle-kit": "1.0.0-beta.6-4414a19"
+		"drizzle-kit": "1.0.0-beta.6-ea4d663"
 	},
 	"dependencies": {
-		"drizzle-orm": "1.0.0-beta.6-4414a19"
+		"drizzle-orm": "1.0.0-beta.6-ea4d663"
 	}
 }
