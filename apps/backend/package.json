@@ -1,0 +1,22 @@
+{
+	"name": "@werstiehltihrdieshow/backend",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "nitro build",
+		"dev": "nitro dev --port 3100",
+		"wrangler:dev": "wrangler dev -c wrangler_websocket.jsonc",
+		"preview": "npx srvx --prod .output/",
+		"deploy": "pnpm build && wrangler deploy",
+		"prepare": "wrangler types"
+	},
+	"devDependencies": {
+		"nitro": "latest",
+		"rolldown": "latest",
+		"wrangler": "4.56.0"
+	},
+	"dependencies": {
+		"@werstiehltihrdieshow/auth": "workspace:*",
+		"@werstiehltihrdieshow/db": "workspace:*"
+	}
+}

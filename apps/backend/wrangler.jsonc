@@ -1,0 +1,54 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "werstiehltihrdieshow-backend",
+	"compatibility_date": "2025-12-26",
+	"compatibility_flags": ["nodejs_compat"],
+	"main": "./.output/server/index.mjs",
+	"observability": {
+		"enabled": true,
+		"traces": {
+			"enabled": true,
+		},
+	},
+	"placement": {
+		"mode": "smart",
+	},
+	"workers_dev": false,
+	"preview_urls": true,
+	"routes": [
+		{
+			"pattern": "api.werstiehltihrdie.show",
+			"custom_domain": true,
+		},
+	],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "werstiehltihrdieshow-prod",
+			"database_id": "ff5b9250-3153-4f1d-aa16-7e01f97a5a1f",
+			"remote": true,
+		},
+	],
+	"r2_buckets": [
+		{
+			"binding": "BUCKET",
+			"bucket_name": "werstiehltihrdieshow-prod",
+			"remote": true,
+		},
+	],
+	// "durable_objects": {
+	// 	"bindings": [
+	// 		{
+	// 			"name": "WEBSOCKET_SERVER",
+	// 			"class_name": "WebSocketServer",
+	// 			"script_name": "websocket-server",
+	// 		},
+	// 	],
+	// },
+	// "migrations": [
+	// 	{
+	// 		"tag": "v1",
+	// 		"new_sqlite_classes": ["WebSocketServer"],
+	// 	},
+	// ],
+}

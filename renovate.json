@@ -1,0 +1,15 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"baseBranches": ["main"],
+	"extends": ["config:recommended", "group:allNonMajor", ":semanticCommitTypeAll(chore)"],
+	"rangeStrategy": "pin",
+	"lockFileMaintenance": {
+		"enabled": true,
+		"commitMessageAction": "Update",
+		"extends": ["group:all"],
+		"schedule": ["every 1 day"]
+	},
+	"npm": {
+		"commitMessageTopic": "{{prettyDepType}} {{depName}}"
+	}
+}

@@ -1,0 +1,23 @@
+{
+	"name": "werstiehltihrdieshow",
+	"type": "module",
+	"packageManager": "pnpm@10.27.0",
+	"devEngines": {
+		"runtime": {
+			"name": "node",
+			"version": "25.2.1",
+			"onFail": "download"
+		}
+	},
+	"scripts": {
+		"format:check": "prettier --check . --experimental-cli",
+		"format": "prettier --write . --experimental-cli"
+	},
+	"devDependencies": {
+		"@types/node": "25.0.3",
+		"prettier": "3.7.4",
+		"prettier-plugin-organize-imports": "4.3.0",
+		"prettier-plugin-svelte": "3.4.1",
+		"prettier-plugin-tailwindcss": "0.7.2"
+	}
+}
