@@ -29,6 +29,6 @@
 		"@werstiehltihrdieshow/auth": "workspace:*",
 		"@werstiehltihrdieshow/db": "workspace:*",
 		"bits-ui": "2.14.4",
-		"valibot": "^1.2.0"
+		"valibot": "1.2.0"
 	}
 }
