@@ -1,4 +1,5 @@
 import { generateId } from '@werstiehltihrdieshow/core/id';
+import { sql } from 'drizzle-orm';
 import * as sqlite from 'drizzle-orm/sqlite-core';
 
 export const ids = {
@@ -14,7 +15,9 @@ export function timestamp() {
 }
 
 export const timestamps = {
-	createdAt: timestamp().notNull(),
+	createdAt: timestamp()
+		.notNull()
+		.default(sql`(unixepoch() * 1000)`),
 	updatedAt: timestamp(),
 	deletedAt: timestamp(),
 };

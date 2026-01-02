@@ -5,3 +5,7 @@ export const completeSignupSchema = v.strictObject({
 	image: v.file(),
 	color: v.string(),
 });
+
+export const generateImageSchema = v.strictObject({
+	prompt: v.string(),
+});

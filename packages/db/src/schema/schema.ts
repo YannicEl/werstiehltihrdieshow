@@ -1,4 +1,5 @@
 export { account } from './account.schema';
+export { blob } from './blob.schema';
 export { game } from './game.schema';
 export { room } from './room.schema';
 export { roomToUser } from './roomToUser.schema';

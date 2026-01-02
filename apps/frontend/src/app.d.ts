@@ -12,6 +12,7 @@ declare global {
 			db: DB;
 			auth: SvelteKitAuth;
 			session: Session;
+			bucket: R2Bucket;
 		}
 		// interface PageData {}
 		// interface PageState {}

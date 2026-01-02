@@ -1,4 +1,3 @@
-import { generateId } from '@werstiehltihrdieshow/core/id';
 import type { DB } from '@werstiehltihrdieshow/db/client';
 import * as schema from '@werstiehltihrdieshow/db/schema/schema';
 import type { BetterAuthPlugin } from 'better-auth';
@@ -23,9 +22,7 @@ export function createAuth({ db, secret, plugins = [] }: CreateAuthParams) {
 		}),
 		plugins: [
 			anonymous({
-				generateRandomEmail: () => {
-					return `${generateId()}@werstiehltihrdieshow.com`;
-				},
+				emailDomainName: 'werstiehltihrdie.show',
 			}),
 			...plugins,
 		],
@@ -46,19 +43,29 @@ export function createAuth({ db, secret, plugins = [] }: CreateAuthParams) {
 		databaseHooks: {
 			user: {
 				create: {
-					before: async (user) => {
-						// Modify user data before creation
-						const [publicId] = user.email.split('@');
-						return { data: { ...user, publicId } };
-					},
+					// before: async (user) => {
+					// 	// Modify user data before creation
+					// 	const [publicId] = user.email.split('@');
+					// 	return { data: { ...user, publicId } };
+					// },
 				},
 			},
 		},
 		user: {
 			additionalFields: {
-				color: {
+				publicId: {
 					type: 'string',
+					required: true,
+					input: false,
+					index: true,
+					unique: true,
+				},
+				avatarBlobId: {
+					type: 'number',
 					required: false,
+					input: false,
+					index: true,
+					unique: true,
 				},
 			},
 		},

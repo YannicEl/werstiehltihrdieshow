@@ -15,32 +15,20 @@ const main: Handle = async ({ event, resolve }) => {
 const autHandle: Handle = async ({ event, resolve }) => {
 	const auth = await useAuth(event);
 
-	const session = await auth.api.getSession({
+	const result = await auth.api.getSession({
 		headers: event.request.headers,
 	});
 
-	console.log(session);
-
-	// if (session) {
-
-	// 	if (user) {
-	// 		event.locals.session = {
-	// 			user: {
-	// 				id: user.id,
-	// 				publicId: user.publicId,
-	// 				email: user.email,
-	// 				firstName: user.firstName,
-	// 				lastName: user.lastName,
-	// 				emailVerified: session.user.emailVerified,
-	// 				twoFactorEnabled: session.user.twoFactorEnabled,
-	// 			},
-	// 			organisation: {
-	// 				id: user.rootOrganisation.id,
-	// 				publicId: user.rootOrganisation.publicId,
-	// 			},
-	// 		};
-	// 	}
-	// }
+	if (result) {
+		const { user } = result;
+		event.locals.session = {
+			user: {
+				id: Number(user.id),
+				publicId: user.publicId,
+				email: user.email,
+			},
+		};
+	}
 
 	return svelteKitHandler({ event, resolve, auth, building });
 };

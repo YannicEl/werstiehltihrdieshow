@@ -16,7 +16,7 @@ export async function createAuth(event: RequestEvent) {
 
 	return createSvelteKitAuth({
 		db,
-		secret: event.platform?.env.BETTER_AUTH_SECRET!,
+		secret: process.env.BETTER_AUTH_SECRET,
 	});
 }
 

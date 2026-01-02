@@ -8,7 +8,6 @@ export default {
 	kit: {
 		adapter: adapter({
 			platformProxy: {
-				environment: 'dev',
 				remoteBindings: true,
 				persist: false,
 			},
