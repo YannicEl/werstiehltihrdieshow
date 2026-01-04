@@ -30,7 +30,7 @@
 		"@werstiehltihrdieshow/auth": "workspace:*",
 		"@werstiehltihrdieshow/db": "workspace:*",
 		"ai": "6.0.6",
-		"bits-ui": "2.15.1",
+		"bits-ui": "2.15.2",
 		"valibot": "1.2.0"
 	}
 }
