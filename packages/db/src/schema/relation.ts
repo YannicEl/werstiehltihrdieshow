@@ -8,6 +8,10 @@ export const relations = defineRelations(schema, (relation) => ({
 		accounts: relation.many.account(),
 		sessions: relation.many.session(),
 		rooms: relation.many.room(),
+		avatarBlob: relation.one.blob({
+			from: relation.user.avatarBlobId,
+			to: relation.blob.id,
+		}),
 	},
 	session: {
 		user: relation.one.user({

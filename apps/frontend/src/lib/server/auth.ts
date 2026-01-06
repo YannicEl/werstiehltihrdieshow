@@ -33,8 +33,8 @@ export async function requireLogin() {
 	const { locals, url } = await getRequestEvent();
 
 	if (!locals.session) {
-		const params = new URLSearchParams();
-		params.append('redirectTo', `${url.pathname}${url.searchParams.toString()}`);
+		const searchParams = new URLSearchParams();
+		searchParams.append('redirectTo', `${url.pathname}${url.searchParams.toString()}`);
 
 		return redirect(307, `/register/`);
 	}

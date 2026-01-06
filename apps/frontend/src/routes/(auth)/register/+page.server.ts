@@ -1,3 +1,5 @@
-export const load = async ({ locals: { auth } }) => {
-	await auth.api.signInAnonymous();
+export const load = async ({ locals: { session, auth } }) => {
+	if (!session) {
+		await auth.api.signInAnonymous();
+	}
 };

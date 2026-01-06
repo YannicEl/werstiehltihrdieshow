@@ -1,60 +1,102 @@
-import { form, query } from '$app/server';
-import { openai } from '$lib/ai/provider';
+import { form, getRequestEvent } from '$app/server';
 import { requireLogin, useAuth } from '$lib/server/auth';
 import { useBucket } from '$lib/server/bucket';
 import { useDB } from '$lib/server/db';
 import { error } from '@sveltejs/kit';
+import { eq } from '@werstiehltihrdieshow/db/operators';
 import { blob as blobSchema } from '@werstiehltihrdieshow/db/schema/blob.schema';
+import { user as userSchema } from '@werstiehltihrdieshow/db/schema/user.schema';
 import { generateImage } from 'ai';
-import { completeSignupSchema, generateImageSchema } from './schema';
-
+import OpenAI from 'openai';
+import { completeSignupSchema, generateAvatarSchema } from './schema';
 export const completeSignup = form(completeSignupSchema, async (data) => {
-	const {} = await requireLogin();
+	const { user } = await requireLogin();
 
+	const event = await getRequestEvent();
 	const auth = await useAuth();
-
 	await auth.api.updateUser({
 		body: {
 			name: data.name,
-			image: data.image,
-			color: data.color,
+		},
+		headers: event.request.headers,
+	});
+
+	const db = await useDB();
+	const blob = await db.query.blob.findFirst({
+		where: {
+			publicId: data.avatarBlobId,
 		},
 	});
+	if (!blob) {
+		throw error(400, 'Avatar blob not found');
+	}
+
+	await db
+		.update(userSchema)
+		.set({
+			avatarBlobId: blob.id,
+		})
+		.where(eq(userSchema.id, user.id));
 });
 
-export const generateImageAction = query(generateImageSchema, async (data) => {
+export const generateAvatar = form(generateAvatarSchema, async (data) => {
 	const { user } = await requireLogin();
 
-	const { image } = await generateImage({
-		model: openai.image('dall-e-3'),
+	const openai = new OpenAI();
+
+	const stream = await openai.images.generate({
 		prompt: data.prompt,
-		size: '1024x1024',
+		background: 'transparent',
+		output_format: 'png',
+		model: 'gpt-image-1',
+		stream: true,
+		partial_images: 2,
 	});
 
-	const dataUrl = `data:${image.mediaType};base64,${image.base64}`;
+	try {
+		const { image } = await generateImage({
+			model: openai.image('gpt-image-1.5'),
+			prompt: {
+				text: data.prompt,
+				images: [await data.image.arrayBuffer()],
+			},
+			size: '1024x1024',
+			providerOptions: {
+				openai: {
+					quality: 'high',
+					background: 'transparent',
+					output_format: 'png',
+				},
+			},
+		});
 
-	const bucket = await useBucket();
-	const db = await useDB();
-	const r2Object = await bucket.put(`${user.publicId}/avatar.png`, image.uint8Array);
-	if (!r2Object) {
-		throw error(500);
+		const bucket = await useBucket();
+		const db = await useDB();
+		const key = `${user.publicId}/avatar.png`;
+		await db.delete(blobSchema).where(eq(blobSchema.key, key));
+		const r2Object = await bucket.put(key, image.uint8Array);
+		if (!r2Object) {
+			throw error(500);
+		}
+
+		const [blob] = await db
+			.insert(blobSchema)
+			.values({
+				name: `avatar.png`,
+				key: r2Object.key,
+				size: r2Object.size,
+				mimeType: 'image/png',
+			})
+			.returning();
+
+		if (!blob) {
+			throw error(500);
+		}
+
+		return {
+			blobPublicId: blob.publicId,
+		};
+	} catch (error) {
+		console.error(error);
 	}
-
-	const [blob] = await db
-		.insert(blobSchema)
-		.values({
-			name: `avatar.png`,
-			key: r2Object.key,
-			size: r2Object.size,
-			mimeType: 'image/png',
-		})
-		.returning();
-
-	if (!blob) {
-		throw error(500);
-	}
-
-	return {
-		blobPublicId: blob.publicId,
-	};
 });

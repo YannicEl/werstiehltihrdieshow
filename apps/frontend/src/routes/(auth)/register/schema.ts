@@ -2,10 +2,10 @@ import * as v from 'valibot';
 
 export const completeSignupSchema = v.strictObject({
 	name: v.string(),
-	image: v.file(),
-	color: v.string(),
+	avatarBlobId: v.string(),
 });
 
-export const generateImageSchema = v.strictObject({
+export const generateAvatarSchema = v.strictObject({
 	prompt: v.string(),
+	image: v.file(),
 });

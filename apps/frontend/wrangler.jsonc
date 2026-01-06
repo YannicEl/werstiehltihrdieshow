@@ -40,6 +40,9 @@
 			"remote": true,
 		},
 	],
+	"images": {
+		"binding": "IMAGES",
+	},
 	// "durable_objects": {
 	// 	"bindings": [
 	// 		{

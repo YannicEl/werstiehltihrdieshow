@@ -11,8 +11,9 @@ declare global {
 		interface Locals {
 			db: DB;
 			auth: SvelteKitAuth;
-			session: Session;
+			session?: Session;
 			bucket: R2Bucket;
+			images: ImagesBinding;
 		}
 		// interface PageData {}
 		// interface PageState {}

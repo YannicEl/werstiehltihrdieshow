@@ -1,1 +1,17 @@
-export { eq } from 'drizzle-orm';
+export {
+	and,
+	arrayContains,
+	arrayOverlaps,
+	asc,
+	cosineDistance,
+	count,
+	desc,
+	eq,
+	exists,
+	gt,
+	ilike,
+	inArray,
+	like,
+	or,
+	sql,
+} from 'drizzle-orm';
