@@ -11,4 +11,4 @@ onlyBuiltDependencies:
 
 peerDependencyRules:
   allowedVersions:
-    vite: '8.0.0-beta.5'
+    vite: '8.0.0-beta.6'
