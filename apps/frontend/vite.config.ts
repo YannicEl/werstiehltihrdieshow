@@ -4,7 +4,9 @@ import unocss from 'unocss/vite';
 import icons from 'unplugin-icons/vite';
 import { defineConfig } from 'vite';
 
-loadEnvFile('./.dev.vars');
+if (import.meta.env.DEV) {
+	loadEnvFile('./.dev.vars');
+}
 
 export default defineConfig({
 	plugins: [sveltekit(), unocss(), icons({ compiler: 'svelte' })],
