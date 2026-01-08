@@ -3,6 +3,7 @@
 	import WebcamVideo from '$lib/components/WebcamVideo.svelte';
 	import { getSession } from '$lib/remote/session/get.remote';
 	import { generateAvatar } from './data.remote';
+	import { GenerateAvatar } from '$lib/generateAvatar.svelte';
 
 	let session = $derived(await getSession());
 
@@ -13,9 +14,24 @@
 
 	async function handleCapture(file: File) {
 		generateAvatar.fields.image.set(file);
+		image = file;
 	}
 
 	generateAvatar.fields.prompt.set('mach mich schöner');
+
+	const avatar = new GenerateAvatar();
+
+	async function handleGenerateImageStream() {
+		if (!image) {
+			console.error('No image');
+			return;
+		}
+
+		await avatar.generate({
+			prompt: generateAvatar.fields.prompt.value(),
+			image,
+		});
+	}
 </script>
 
 <div>
@@ -46,13 +62,16 @@
 
 			<button>Generate Image</button>
 		</form>
+		<button onclick={handleGenerateImageStream}>Generate Image Stream</button>
 	</div>
 
 	{#if errorMessage}
 		<div style="color: red; margin-top: 10px;">{errorMessage}</div>
 	{/if}
 
-	<AvatarImage userPublicId={session?.user?.publicId} class="size-12" />
+	{#if avatar.dataURL}
+		<img src={avatar.dataURL} />
+	{/if}
 
 	{#if generateAvatar.result?.blobPublicId}
 		<div style="margin-top: 20px;">

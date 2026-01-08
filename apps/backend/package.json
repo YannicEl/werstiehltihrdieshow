@@ -7,7 +7,7 @@
 		"dev": "nitro dev --port 3100",
 		"wrangler:dev": "wrangler dev -c wrangler_websocket.jsonc",
 		"preview": "npx srvx --prod .output/",
-		"deploy": "pnpm build && wrangler deploy",
+		"deploy": "wrangler deploy",
 		"prepare": "wrangler types"
 	},
 	"devDependencies": {

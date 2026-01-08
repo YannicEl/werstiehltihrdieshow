@@ -14,7 +14,7 @@
 		"mode": "smart",
 	},
 	"workers_dev": false,
-	"preview_urls": true,
+	"preview_urls": false,
 	"assets": {
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare",
@@ -43,13 +43,13 @@
 	"images": {
 		"binding": "IMAGES",
 	},
-	// "durable_objects": {
-	// 	"bindings": [
-	// 		{
-	// 			"name": "WEBSOCKET_SERVER",
-	// 			"class_name": "WebSocketServer",
-	// 			"script_name": "websocket-server",
-	// 		},
-	// 	],
-	// },
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "WEBSOCKET_SERVER",
+				"class_name": "WebSocketServer",
+				"script_name": "werstiehltihrdieshow-backend",
+			},
+		],
+	},
 }

@@ -3,7 +3,7 @@
 	"name": "werstiehltihrdieshow-backend",
 	"compatibility_date": "2025-12-26",
 	"compatibility_flags": ["nodejs_compat"],
-	"main": "./.output/server/index.mjs",
+	"main": "./exports.cloudflare.ts",
 	"observability": {
 		"enabled": true,
 		"traces": {
@@ -14,7 +14,7 @@
 		"mode": "smart",
 	},
 	"workers_dev": false,
-	"preview_urls": true,
+	"preview_urls": false,
 	"routes": [
 		{
 			"pattern": "api.werstiehltihrdie.show",
@@ -36,19 +36,18 @@
 			"remote": true,
 		},
 	],
-	// "durable_objects": {
-	// 	"bindings": [
-	// 		{
-	// 			"name": "WEBSOCKET_SERVER",
-	// 			"class_name": "WebSocketServer",
-	// 			"script_name": "websocket-server",
-	// 		},
-	// 	],
-	// },
-	// "migrations": [
-	// 	{
-	// 		"tag": "v1",
-	// 		"new_sqlite_classes": ["WebSocketServer"],
-	// 	},
-	// ],
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "WEBSOCKET_SERVER",
+				"class_name": "WebSocketServer",
+			},
+		],
+	},
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_sqlite_classes": ["WebSocketServer"],
+		},
+	],
 }

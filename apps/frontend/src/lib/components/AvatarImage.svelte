@@ -1,22 +1,22 @@
 <script lang="ts">
-	import { getBlobDownloadURL } from '$lib/blobDownload';
 	import { getUserAvatarBlob } from '$lib/remote/user/avatar/get.remote';
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import MdiAccount from '~icons/mdi/account';
+	import BlobImg from './BlobImg.svelte';
 
 	type Props = {
-		userPublicId?: string;
+		userPublicId: string;
 	} & SvelteHTMLElements['div'];
 
 	let { userPublicId, ...props }: Props = $props();
 
-	let avatarBlob = $derived(userPublicId ? await getUserAvatarBlob({ userPublicId }) : undefined);
+	let avatarBlob = $derived(await getUserAvatarBlob({ userPublicId }));
 </script>
 
 <div {...props} class={['aspect-square', props.class]}>
 	{#if avatarBlob}
-		<img
-			src={getBlobDownloadURL(avatarBlob.publicId)}
+		<BlobImg
+			blobPublicId={avatarBlob.publicId}
 			alt="Avatar"
 			class="aspect-square h-full w-full"
 			width="1024"
