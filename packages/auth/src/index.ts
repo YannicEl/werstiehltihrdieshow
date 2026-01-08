@@ -3,18 +3,23 @@ import * as schema from '@werstiehltihrdieshow/db/schema/schema';
 import type { BetterAuthPlugin } from 'better-auth';
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-import { anonymous } from 'better-auth/plugins';
 
 export type CreateAuthParams = {
 	db: DB;
 	secret: string;
+	google?: {
+		clientId: string;
+		clientSecret: string;
+	};
 	plugins?: BetterAuthPlugin[];
 };
 
-export function createAuth({ db, secret, plugins = [] }: CreateAuthParams) {
+export function createAuth({ db, secret, google, plugins = [] }: CreateAuthParams) {
+	const isProd = process.env.NODE_ENV === 'production';
+
 	return betterAuth({
-		baseURL: import.meta.env.PROD ? 'https://werstiehltihrdie.show' : 'http://localhost:3000',
-		basePath: '_auth',
+		baseURL: isProd ? 'https://werstiehltihrdie.show' : 'http://localhost:3000',
+		basePath: '/_auth',
 		appName: 'Wer stiehlt ihr die Show',
 		secret,
 		database: drizzleAdapter(db, {
@@ -23,12 +28,7 @@ export function createAuth({ db, secret, plugins = [] }: CreateAuthParams) {
 			usePlural: false,
 			schema,
 		}),
-		plugins: [
-			anonymous({
-				emailDomainName: 'werstiehltihrdie.show',
-			}),
-			...plugins,
-		],
+		plugins,
 		session: {
 			cookieCache: {
 				enabled: true,
@@ -37,12 +37,22 @@ export function createAuth({ db, secret, plugins = [] }: CreateAuthParams) {
 		emailAndPassword: {
 			enabled: false,
 		},
+		socialProviders: {
+			google,
+		},
 		advanced: {
 			database: {
 				generateId: 'serial',
 			},
 			cookiePrefix: 'auth',
+			crossSubDomainCookies: {
+				enabled: true,
+				domain: isProd ? 'werstiehltihrdie.show' : 'localhost',
+			},
 		},
+		trustedOrigins: isProd
+			? ['https://werstiehltihrdie.show', 'https://api.werstiehltihrdie.show']
+			: ['http://localhost:3000', 'http://localhost:8787'],
 		databaseHooks: {
 			user: {
 				create: {

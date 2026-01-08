@@ -12,11 +12,15 @@ export type Session = {
 };
 
 export async function createAuth(event: RequestEvent) {
-	const db = await useDB();
+	const db = await useDB(event);
 
 	return createSvelteKitAuth({
 		db,
 		secret: process.env.BETTER_AUTH_SECRET,
+		google: {
+			clientId: process.env.GOOGLE_OAUTH_CLIENT_ID,
+			clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+		},
 	});
 }
 

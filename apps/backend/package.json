@@ -5,7 +5,7 @@
 	"scripts": {
 		"build": "nitro build",
 		"dev": "nitro dev --port 3100",
-		"wrangler:dev": "wrangler dev -c wrangler_websocket.jsonc",
+		"wrangler:dev": "wrangler dev",
 		"preview": "npx srvx --prod .output/",
 		"deploy": "wrangler deploy",
 		"prepare": "wrangler types"

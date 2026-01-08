@@ -1,4 +1,5 @@
 import { getRequestEvent } from '$app/server';
+import { anonymous } from 'better-auth/plugins';
 import { sveltekitCookies } from 'better-auth/svelte-kit';
 import { createAuth, type CreateAuthParams } from './index';
 export { svelteKitHandler } from 'better-auth/svelte-kit';
@@ -11,6 +12,11 @@ export function createSvelteKitAuth({ db, secret }: CreateSvelteKitAuth) {
 	return createAuth({
 		db,
 		secret,
-		plugins: [sveltekitCookies(getRequestEvent)],
+		plugins: [
+			anonymous({
+				emailDomainName: 'werstiehltihrdie.show',
+			}),
+			sveltekitCookies(getRequestEvent),
+		],
 	});
 }
