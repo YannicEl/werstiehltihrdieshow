@@ -4,7 +4,7 @@ import unocss from 'unocss/vite';
 import icons from 'unplugin-icons/vite';
 import { defineConfig } from 'vite';
 
-if (import.meta.env.DEV) {
+if (process.env.NODE_ENV === 'development') {
 	loadEnvFile('./.dev.vars');
 }
 
