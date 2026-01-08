@@ -5,7 +5,7 @@ import icons from 'unplugin-icons/vite';
 import { defineConfig } from 'vite';
 
 if (process.env.NODE_ENV === 'development') {
-	loadEnvFile('./.dev.vars');
+	loadEnvFile('./.env');
 }
 
 export default defineConfig({

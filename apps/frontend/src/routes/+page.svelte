@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { createUser, getUsers } from './data.remote';
+	import { PUBLIC_WEBSOCKET_URL } from '$env/static/public';
 
 	const data = $derived(await getUsers());
 
@@ -10,7 +11,7 @@
 	}
 
 	onMount(() => {
-		const websocket = new WebSocket('ws://localhost:8787/websocket');
+		const websocket = new WebSocket(PUBLIC_WEBSOCKET_URL);
 		websocket.onmessage = (event) => {
 			console.log(event);
 		};
