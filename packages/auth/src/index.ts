@@ -4,6 +4,7 @@ import type { BetterAuthPlugin } from 'better-auth';
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { anonymous } from 'better-auth/plugins';
+
 export type CreateAuthParams = {
 	db: DB;
 	secret: string;
@@ -12,6 +13,8 @@ export type CreateAuthParams = {
 
 export function createAuth({ db, secret, plugins = [] }: CreateAuthParams) {
 	return betterAuth({
+		baseURL: import.meta.env.PROD ? 'https://werstiehltihrdie.show' : 'http://localhost:3000',
+		basePath: '_auth',
 		appName: 'Wer stiehlt ihr die Show',
 		secret,
 		database: drizzleAdapter(db, {
