@@ -15,11 +15,6 @@ export class WebSocketServer extends DurableObject {
 		// and allowing the WebSocket to send and receive messages.
 		server.accept();
 
-		// Generate a random UUID for the session.
-		const id = crypto.randomUUID();
-		// Add the WebSocket connection to the map of active sessions.
-		this.sessions.set(server, { id });
-
 		server.addEventListener('message', (event) => {
 			console.log('message', event.data);
 			server.send(event.data);
