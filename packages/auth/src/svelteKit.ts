@@ -8,7 +8,7 @@ export type CreateSvelteKitAuth = {} & Omit<CreateAuthParams, 'plugins'>;
 
 export type SvelteKitAuth = Awaited<ReturnType<typeof createSvelteKitAuth>>;
 
-export function createSvelteKitAuth({ db, secret }: CreateSvelteKitAuth) {
+export function createSvelteKitAuth({ db, secret, google }: CreateSvelteKitAuth) {
 	return createAuth({
 		db,
 		secret,
@@ -18,5 +18,6 @@ export function createSvelteKitAuth({ db, secret }: CreateSvelteKitAuth) {
 			}),
 			sveltekitCookies(getRequestEvent),
 		],
+		google,
 	});
 }
