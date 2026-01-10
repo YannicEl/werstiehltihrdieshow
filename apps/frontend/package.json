@@ -8,7 +8,7 @@
 		"preview": "wrangler dev .svelte-kit/cloudflare/_worker.js",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"types": "wrangler types --env dev",
+		"types": "wrangler types",
 		"deploy": "pnpm build && wrangler deploy",
 		"prepare": "pnpm run types && svelte-kit sync || echo ''"
 	},
