@@ -1,8 +1,14 @@
 export { account } from './account.schema';
 export { blob } from './blob.schema';
 export { game } from './game.schema';
+export { gameSession } from './gameSession.schema';
+export { playerAnswer } from './playerAnswer.schema';
+export { question } from './question.schema';
+export { questionOption } from './questionOption.schema';
 export { room } from './room.schema';
 export { roomToUser } from './roomToUser.schema';
+export { round } from './round.schema';
 export { session } from './session.schema';
+export { sessionPlayer } from './sessionPlayer.schema';
 export { user } from './user.schema';
 export { verification } from './verification.schema';

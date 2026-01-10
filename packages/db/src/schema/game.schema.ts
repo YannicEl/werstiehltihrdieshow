@@ -9,12 +9,15 @@ export const game = sqlite.sqliteTable(
 	{
 		...ids,
 
-		userId: sqlite
+		name: sqlite.text().notNull(),
+		description: sqlite.text(),
+
+		createdByUserId: sqlite
 			.integer()
 			.references(() => user.id)
 			.notNull(),
 
 		...timestamps,
 	},
-	(table) => [sqlite.index('game_user_id_index').on(table.userId)]
+	(table) => [sqlite.index('game_created_by_user_id_index').on(table.createdByUserId)]
 );
