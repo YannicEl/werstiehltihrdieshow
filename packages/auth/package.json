@@ -17,6 +17,6 @@
 	"dependencies": {
 		"@werstiehltihrdieshow/core": "workspace:*",
 		"@werstiehltihrdieshow/db": "workspace:*",
-		"better-auth": "1.4.12"
+		"better-auth": "1.4.13"
 	}
 }
