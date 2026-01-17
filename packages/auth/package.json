@@ -8,15 +8,15 @@
 		"./*": "./src/*.ts"
 	},
 	"peerDependencies": {
-		"@sveltejs/kit": "2.49.4"
+		"@sveltejs/kit": "2.49.5"
 	},
 	"devDependencies": {
 		"@total-typescript/tsconfig": "1.0.4",
-		"@types/node": "25.0.8"
+		"@types/node": "25.0.9"
 	},
 	"dependencies": {
 		"@werstiehltihrdieshow/core": "workspace:*",
 		"@werstiehltihrdieshow/db": "workspace:*",
-		"better-auth": "1.4.13"
+		"better-auth": "1.4.14"
 	}
 }
