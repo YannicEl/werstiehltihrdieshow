@@ -16,11 +16,11 @@
 	},
 	"devDependencies": {
 		"@total-typescript/tsconfig": "1.0.4",
-		"@types/node": "25.0.9",
-		"drizzle-kit": "1.0.0-beta.9-e89174b"
+		"@types/node": "25.9.5",
+		"drizzle-kit": "1.0.0-rc.5-ab785fc"
 	},
 	"dependencies": {
-		"drizzle-orm": "1.0.0-beta.9-e89174b",
-		"nanoid": "5.1.6"
+		"drizzle-orm": "1.0.0-rc.5-ab785fc",
+		"nanoid": "5.1.16"
 	}
 }
